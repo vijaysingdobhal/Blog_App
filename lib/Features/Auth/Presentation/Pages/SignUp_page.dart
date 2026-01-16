@@ -2,8 +2,10 @@ import 'package:blogapp/Features/Auth/Presentation/Pages/Login_page.dart';
 import 'package:blogapp/Features/Auth/Presentation/Widgets/auth_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../Core/Theme/AppPallet.dart';
 import '../Widgets/gradient_button.dart';
+import '../bloc/auth_bloc.dart';
 
 class SignupPage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const SignupPage());
@@ -63,10 +65,23 @@ class _SignupPageState extends State<SignupPage> {
                     isObscure: true,
                   ),
                   const SizedBox(height: 30),
-                  const GradientButton(buttonText: "Sign Up"),
+                  GradientButton(
+                    buttonText: "Sign Up",
+                    onPressed: () {
+                      if (globalKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                          AuthSignup(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            username: usernameController.text,
+                          ),
+                        );
+                      }
+                    },
+                  ),
                   const SizedBox(height: 20),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(context, LoginPage.route());
                     },
                     child: RichText(

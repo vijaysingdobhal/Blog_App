@@ -55,7 +55,14 @@ class _LoginPageState extends State<LoginPage> {
                     isObscure: true,
                   ),
                   const SizedBox(height: 30),
-                  const GradientButton(buttonText: "Sign In"),
+                  GradientButton(buttonText: "Sign In", onPressed: () {
+                    if (globalKey.currentState!.validate()){
+                      (
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    }
+                  },),
                   const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {

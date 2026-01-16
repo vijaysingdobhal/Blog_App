@@ -3,7 +3,8 @@ import '../../../../Core/Theme/AppPallet.dart';
 
 class GradientButton extends StatelessWidget {
   final String buttonText;
-  const GradientButton({super.key, required this.buttonText});
+  final VoidCallback onPressed;
+  const GradientButton({super.key, required this.buttonText, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class GradientButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(7),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(395, 55),
           backgroundColor: AppPallet.transparentColor,

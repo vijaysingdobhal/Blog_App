@@ -33,7 +33,9 @@ class AuthDatasourceImpl implements AuthDatasource {
       if (response.user == null) {
         throw const Serverexception('User Null');
       }
-      return Future.value(response.user!.id);
+      return response.user!.id;
+    } on AuthException catch (e) {
+      throw Serverexception(e.message);
     } catch (e) {
       throw Serverexception(e.toString());
     }
